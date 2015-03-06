@@ -1,6 +1,6 @@
-@API = require './api.coffee'
+API = require './api.coffee'
 
-module.exports = class Stashes extends @API
+module.exports = class Stashes extends API
   constructor: ->
     super
 
