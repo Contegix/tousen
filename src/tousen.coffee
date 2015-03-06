@@ -2,6 +2,7 @@ class Tousen
   Stashes = require './lib/stashes.coffee'
   Clients = require './lib/clients.coffee'
   Checks = require './lib/checks.coffee'
+  Events = require './lib/events.coffee'
   http_client = require 'scoped-http-client'
 
   constructor: (url, options) ->
@@ -20,6 +21,7 @@ class Tousen
     @stashes = new Stashes client
     @clients = new Clients client
     @checks = new Checks client
+    @events = new Events client
 
 module.exports = (url, options) ->
   new Tousen url, options
