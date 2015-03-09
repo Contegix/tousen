@@ -1,36 +1,36 @@
 module.exports = class SensuAPI
-  constructor: (@client) ->
+  constructor: ({@client, @output_json}) ->
 
   status_codes: {
     200: true,
     201: true,
     202: true,
     204: true,
-    400: "Sensu API response 400: Request malformed.",
-    404: "Sensu API response 404: Requested object missing.",
-    500: "Sensu API response 500: Error.",
-    503: "Sensu API response 503: Unavailable."
+    400: "400: Request malformed.",
+    404: "404: Requested object missing.",
+    500: "500: Error.",
+    503: "503: Unavailable."
   }
 
   error_unknown: (code) ->
-    new Error "Sensu API response #{code}: Unknown response."
+    new Error "#{code}: Unhandled response code."
 
-  get: (path, options, callback) ->
+  get: ({path, callback}) ->
     @client.scope path, (cli) =>
       cli.get() (err, resp, body) =>
-        @send_result err, resp, body, options, callback
+        @send_result err, resp, body, callback
 
-  post: (path, options, callback) ->
+  post: ({path, payload, callback}) ->
     @client.scope path, (cli) =>
-      cli.post(options.payload) (err, resp, body) =>
-        @send_result err, resp, body, options, callback
+      cli.post(payload) (err, resp, body) =>
+        @send_result err, resp, body, callback
 
-  delete: (path, options, callback) ->
+  delete: ({path, callback}) ->
     @client.scope path, (cli) =>
       cli.del() (err, resp, body) =>
-        @send_result err, resp, body, options, callback
+        @send_result err, resp, body, callback
 
-  send_result: (err, resp, body, options, callback) ->
+  send_result: (err, resp, body, callback) ->
     # If an error was generated during the API method call, pass it to the callback.
     if err
       callback(err, body)
@@ -41,15 +41,14 @@ module.exports = class SensuAPI
         callback(new Error @status_codes[resp.statusCode], body)
       # If it's a status code that maps to "true", it's successful. Pass the body to the callback.
       else
-        if options.deserialize_response # Perhaps we should just deserialize by default?
+        if @output_json
+          callback(err, body)
+        else
           try
             output = JSON.parse(body)
           catch e
             err = e
-            output = body
-        else
-          output = body
-        callback(err, output)
+          callback(err, output)
     # If we don't recognize the status code, pass an error to the callback.
     else
       callback(@error_unknown(resp.statusCode), body)
