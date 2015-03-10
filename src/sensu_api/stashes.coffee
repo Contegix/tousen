@@ -1,4 +1,4 @@
-SensuAPI = require '../sensu_api.coffee'
+SensuAPI = require '../sensu_api'
 
 # Provides methods for accessing the stashes endpoints of the Sensu API
 # @see http://sensuapp.org/docs/latest/api_stashes

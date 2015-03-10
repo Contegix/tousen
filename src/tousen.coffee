@@ -17,12 +17,12 @@
 # @copyright Contegix, LLC 2015
 #
 module.exports = class Tousen
-  Stashes = require './sensu_api/stashes.coffee'
-  Clients = require './sensu_api/clients.coffee'
-  Checks = require './sensu_api/checks.coffee'
-  Events = require './sensu_api/events.coffee'
-  Aggregates = require './sensu_api/aggregates.coffee'
-  Info = require './sensu_api/info.coffee'
+  Stashes = require './sensu_api/stashes'
+  Clients = require './sensu_api/clients'
+  Checks = require './sensu_api/checks'
+  Events = require './sensu_api/events'
+  Aggregates = require './sensu_api/aggregates'
+  Info = require './sensu_api/info'
   http_client = require 'scoped-http-client'
 
   # Construct a new instance of a Sensu API client
