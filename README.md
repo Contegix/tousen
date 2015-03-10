@@ -33,6 +33,8 @@ sensu_api.events.get_events callback: (err, res) ->
   else
     console.log 'res is now an object containing all events!'
 ```
+
+Full documentation may be found [here](http://contegix.github.io/tousen/doc/index.html)
  
 ## Generating Documentation
 
