@@ -6,7 +6,7 @@ SensuAPI = require '../sensu_api.coffee'
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
 class Aggregates extends SensuAPI
-  # See {SensuAPI.constructor}
+  # See {SensuAPI#constructor}
   constructor: ->
     super
 
@@ -27,12 +27,12 @@ class Aggregates extends SensuAPI
   # @example Using the Tousen namespace, get an array of aggregate data for the check "test_check"
   #   Tousen = require 'tousen'
   #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
-  #   sensu_api.aggregates.get_aggregates_for_check check: 'test_check', callback: (err, res) ->
+  #   sensu_api.aggregates.get_aggregates_check check: 'test_check', callback: (err, res) ->
   #     test_client_aggregates = res
   #
   # @param {String} check The check name for which to retrieve aggregates
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
-  get_aggregates_for_check: ({check, callback}) ->
+  get_aggregates_check: ({check, callback}) ->
     @get path: "aggregates/#{check}", callback: callback
 
   # Get an aggregate object from the Sensu API using a check name and an issued timestamp.

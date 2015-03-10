@@ -2,6 +2,16 @@
 #
 # Tousen implements an async wrapper for the Sensu API written in CoffeeScript. 
 # API endpoint methods are exposed via the instances of Sensu API clients bound to its properties.
+# 
+# See the following classes for API endpoints exposed by properties on this class: 
+#
+# - {Aggregates} 
+# - {Checks} 
+# - {Clients} 
+# - {Events} 
+# - {Info}
+# - {Stashes} 
+#
 #
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
@@ -12,6 +22,7 @@ module.exports = class Tousen
   Checks = require './sensu_api/checks.coffee'
   Events = require './sensu_api/events.coffee'
   Aggregates = require './sensu_api/aggregates.coffee'
+  Info = require './sensu_api/info.coffee'
   http_client = require 'scoped-http-client'
 
   # Construct a new instance of a Sensu API client
@@ -39,3 +50,4 @@ module.exports = class Tousen
     @checks = new Checks client: client, output_json: output_json
     @events = new Events client: client, output_json: output_json
     @aggregates = new Aggregates client: client, output_json: output_json
+    @info = new Info client: client, output_json: output_json

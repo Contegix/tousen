@@ -6,7 +6,7 @@ SensuAPI = require '../sensu_api.coffee'
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
 class Clients extends SensuAPI
-  # See {SensuAPI.constructor}
+  # See {SensuAPI#constructor}
   constructor: ->
     super
 

@@ -6,7 +6,7 @@ SensuAPI = require '../sensu_api.coffee'
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
 class Checks extends SensuAPI
-  # See {SensuAPI.constructor}
+  # See {SensuAPI#constructor}
   constructor: ->
     super
 
@@ -37,10 +37,10 @@ class Checks extends SensuAPI
 
   # Request a check run via the Sensu API
   #
-  # @example Using the Tousen namespace, request a run of the check "test_check" for subscribers "production"
+  # @example Using the Tousen namespace, request a run of the check "test_check" for subscribers "test"
   #   data = {
-  #    check: "chef_client_process",
-  #    "subscribers": ["production"]
+  #    check: "test_check",
+  #    "subscribers": ["test"]
   #   }
   #   Tousen = require 'tousen'
   #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
