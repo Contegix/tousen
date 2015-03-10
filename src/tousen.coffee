@@ -1,7 +1,5 @@
-# Top level namespace for Tousen. Requires scoped-http-client.
-#
 # Tousen implements an async wrapper for the Sensu API written in CoffeeScript. 
-# API endpoint methods are exposed via the instances of Sensu API clients bound to its properties.
+# API endpoint methods are exposed via the instances of Sensu API clients bound to its properties. Methods which combine data from multiple API methods are implemented in this class.
 # 
 # See the following classes for API endpoints exposed by properties on this class: 
 #
@@ -12,10 +10,13 @@
 # - {Info}
 # - {Stashes} 
 #
+# Dependencies:
+#
+#  - scoped-http-client
+#  - deasync
 #
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
-#
 module.exports = class Tousen
   Stashes = require './sensu_api/stashes'
   Clients = require './sensu_api/clients'
@@ -24,6 +25,7 @@ module.exports = class Tousen
   Aggregates = require './sensu_api/aggregates'
   Info = require './sensu_api/info'
   http_client = require 'scoped-http-client'
+  deasync = require 'deasync'
 
   # Construct a new instance of a Sensu API client
   #
@@ -51,3 +53,48 @@ module.exports = class Tousen
     @events = new Events client: client, output_json: output_json
     @aggregates = new Aggregates client: client, output_json: output_json
     @info = new Info client: client, output_json: output_json
+
+  # Get an array of all event objects from the Sensu API with additional parameters added to indicate whether silence stashes exist for the check or client. 
+  #
+  # - If a stash exists for the check, ```event.check.silenced``` will be ```true```. 
+  # - If a stash exists for the client, ```event.client.silenced``` will be ```true```.
+  # - If either ```event.client.silenced``` or ```event.check.silenced``` are ```true```, ```event.silenced``` will be true.
+  #
+  # @example Get an array of all event objects with additional parameters indicating silence status
+  #   Tousen = require 'tousen'
+  #   sensu_api = new Tousen url: 'http://sensu.example.com:4567'
+  #   sensu_api.get_events_silence_status callback (err, res) ->
+  #     events = res
+  #
+  # @param {Function} callback The callback to receive the response, of the form function(error, response)
+  get_events_silence_status: ({callback}) ->
+    stashes_err = stashes = events_err = events = stashes_done = events_done = null
+    @stashes.get_stashes callback: (err, res) =>
+      stashes_err = err
+      stashes = res
+      stashes_done = true
+    @events.get_events callback: (err, res) =>
+      events_err = err
+      events = res
+      events_done = true
+    # Wait until both of the callbacks are called
+    deasync.sleep(100) until events_done? and stashes_done?
+    if stashes_err?
+      callback stashes_err
+    else if events_err?
+      callback events_err
+    else
+      stash_paths = stashes.map (stash) ->
+        return stash.path
+      for e,i in events
+        if "silence/#{e.client.name}/#{e.check.name}" in stash_paths
+          events[i].check['silenced'] = true
+        else
+          events[i].check['silenced'] = false
+        if "silence/#{e.client.name}" in stash_paths
+          events[i].client['silenced'] = true
+        else
+          events[i].client['silenced'] = false
+        if events[i].client['silenced'] or events[i].check['silenced']
+          events[i]['silenced'] = true
+    callback null, events
