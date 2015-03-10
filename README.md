@@ -10,7 +10,9 @@ Presently, it is in the very early stages of development.
 
 ## Installation
 
-*NPM coming soon*
+```
+npm install tousen
+```
 
 ### Dependencies
 
