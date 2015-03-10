@@ -1,0 +1,35 @@
+{
+  "name": "tousen",
+  "description": "Sensu API client wrapper",
+  "version": "0.0.1",
+  "author": "Richard Chatterton <richard.chatterton@contegix.com>",
+  "engines": [
+    "node >= 0.8.0"
+  ],
+  "homepage": "https://github.com/Contegix/tousen",
+  "main": "./lib/tousen.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Contegix/tousen.git"
+  },
+  "scripts": {
+    "prepublish": "coffee -o lib/ src/"
+  },
+  "dependencies": {
+    "scoped-http-client": "*"
+  },
+  "devDependencies": {
+    "coffee-script": "1.8.0",
+    "codo": "*"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Contegix/tousen/blob/master/LICENSE.txt"
+    }
+  ],
+  "keywords": ["sensu","api","client","async"]
+}
