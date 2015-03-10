@@ -1,23 +1,54 @@
 SensuAPI = require '../sensu_api.coffee'
 
-# The callbacks to these methods should accept two parameters, an error object and the result.
+# Provides functions for accessing the checks endpoints of the Sensu API
+#
+# @author Richard Chatterton <richard.chatterton@contegix.com>
+# @copyright Contegix, LLC 2015
 module.exports = class Checks extends SensuAPI
+  # See {SensuAPI.constructor}
   constructor: ->
     super
 
-  # Returns an array of all checks from the Sensu API to the callback.
+  # Get an array of all checks from the Sensu API
+  #
+  # @example Using the Tousen namespace, get an array of all checks
+  #   Tousen = require 'tousen'
+  #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
+  #   sensu_api.checks.get_checks callback: (err, res) ->
+  #     checks = res
+  #
+  # @param {Function} callback The callback to receive the response, of the form function(error, response) 
   get_checks: ({callback}) ->
     @get path: 'checks', callback: callback
 
-  # Requires a check name as "check".
-  # Returns the check object from the Sensu API to the callback.
+  # Get an a check object from the Sensu API
+  #
+  # @example Using the Tousen namespace, get the check object for a check named "test_check"
+  #   Tousen = require 'tousen'
+  #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
+  #   sensu_api.checks.get_check check: "test_check", callback: (err, res) ->
+  #     check = res
+  #
+  # @param {String} check The name of the check which should be retrieved
+  # @param {Function} callback The callback to receive the response, of the form function(error, response) 
   get_check: ({check, callback}) ->
     @get path: "checks/#{check}", callback: callback
 
-  # Requires a check name as "check". and an object containing additional parameters to be posted in the run request as "data".
-  # Sends a run request via the Sensu API. 
-  # Returns the result of the API call to the callback.
-  request_run: ({check, data, callback}) ->
+  # Request a check run via the Sensu API
+  #
+  # @example Using the Tousen namespace, request a run of the check "test_check" for subscribers "production"
+  #   data = {
+  #    check: "chef_client_process",
+  #    "subscribers": ["production"]
+  #   }
+  #   Tousen = require 'tousen'
+  #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
+  #   sensu_api.checks.get_check data: data, callback: (err, res) ->
+  #     check = res
+  #
+  # @param {Object} data An object defining the check(s) which should be run
+  # @param {Function} callback The callback to receive the response, of the form function(error, response) 
+  request_run: ({data, callback}) ->
     try
       payload = JSON.stringify(data)
       @post path: "request", payload: payload, callback: callback

@@ -1,2 +1,4 @@
 *.swp
 doc/
+npm-debug.log
+lib/
