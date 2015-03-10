@@ -79,19 +79,18 @@ class Stashes extends SensuAPI
         callback e, payload
     @post path: "stashes/#{path}", payload: payload, callback: callback
 
-  # Create a stash at a path with an object defining the stash's content
+  # Delete the stash at the specified path
   #
-  # @example Using the Tousen namespace, create a stash with path "silence/test_client" and content containing a reason
+  # @example Using the Tousen namespace, delete a stash with path "silence/test_client"
   #   Tousen = require 'tousen'
   #   data = { 
   #     reason: "This client was silenced for a reason."
   #   }
   #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
-  #   sensu_api.stashes.create_stash_path path: "silence/test_client", data: data, callback: (err, res) ->
+  #   sensu_api.stashes.delete_stash path: "silence/test_client", callback: (err, res) ->
   #     response = res
   #
-  # @param {String} path The path of the stash to be created
-  # @param {Object} data An object describing the content of the stash to be created
+  # @param {String} path The path of the stash to be deleted
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
   delete_stash: ({path, callback}) ->
     @delete "stashes/#{path}", options, callback
