@@ -2,7 +2,7 @@
 
 tousen (豆扇) is an async Sensu API client written in CoffeeScript, originally developed for use with [Hubot](https://hubot.github.com/)
 
-See *Generating Documentation* for information on how to generate the documentation which describes various API methods tousen provides.
+See *Generating Documentation* for information on how to generate the documentation which describes the various API methods tousen provides.
 
 Presently, it is in the very early stages of development.
 
