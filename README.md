@@ -43,7 +43,7 @@ Documentation may be generated using [codo](https://github.com/coffeedoc/codo). 
 
 ```
 npm install
-node_modules/codo/bin/codo src/
+codo
 ```
 
 Then, open ```doc/index.html``` in a browser to view it.

@@ -1,0 +1,7 @@
+--name "Tousen"
+--title "Tousen Documentation"
+--readme README.md
+./src
+-
+LICENSE.txt
+CHANGELOG.md
