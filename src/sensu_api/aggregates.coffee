@@ -1,10 +1,11 @@
 SensuAPI = require '../sensu_api.coffee'
 
-# Provides functions for accessing the aggregates endpoints of the Sensu API
+# Provides methods for accessing the aggregates endpoints of the Sensu API
+# @see http://sensuapp.org/docs/latest/api_aggregates
 #
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
-module.exports = class Aggregates extends SensuAPI
+class Aggregates extends SensuAPI
   # See {SensuAPI.constructor}
   constructor: ->
     super
@@ -47,3 +48,5 @@ module.exports = class Aggregates extends SensuAPI
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
   get_aggregate: ({check, issued, callback}) ->
     @get path: "aggregates/#{check}/#{issued}", callback: callback
+
+module.exports = Aggregates

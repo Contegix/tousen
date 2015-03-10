@@ -1,10 +1,11 @@
 SensuAPI = require '../sensu_api.coffee'
 
-# Provides functions for accessing the checks endpoints of the Sensu API
+# Provides methods for accessing the checks endpoints of the Sensu API
+# @see http://sensuapp.org/docs/latest/api_checks
 #
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
-module.exports = class Checks extends SensuAPI
+class Checks extends SensuAPI
   # See {SensuAPI.constructor}
   constructor: ->
     super
@@ -44,7 +45,7 @@ module.exports = class Checks extends SensuAPI
   #   Tousen = require 'tousen'
   #   sensu_api = new Tousen url: "http://sensu.example.com:4567"
   #   sensu_api.checks.get_check data: data, callback: (err, res) ->
-  #     check = res
+  #     response = res
   #
   # @param {Object} data An object defining the check(s) which should be run
   # @param {Function} callback The callback to receive the response, of the form function(error, response) 
@@ -54,3 +55,5 @@ module.exports = class Checks extends SensuAPI
       @post path: "request", payload: payload, callback: callback
     catch e
       callback e, data
+
+module.exports = Checks
