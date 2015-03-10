@@ -4,7 +4,7 @@ tousen (豆扇) is an async Sensu API client written in CoffeeScript, originally
 
 See *Generating Documentation* for information on how to generate the documentation which describes the various API methods tousen provides.
 
-Full documentation of all API wrapper methods can be found on the appropriate classes [here](http://contegix.github.io/tousen/doc/index.html).
+Full documentation of all API wrapper methods can be found on the appropriate classes [here](http://contegix.github.io/tousen/).
 
 Presently, it is in the very early stages of development.
 
@@ -38,7 +38,7 @@ sensu_api.events.get_events callback: (err, res) ->
     console.log 'res is now an object containing all events!'
 ```
 
-Full documentation may be found [here](http://contegix.github.io/tousen/doc/index.html).
+Full documentation may be found [here](http://contegix.github.io/tousen/).
  
 ## Generating Documentation
 
