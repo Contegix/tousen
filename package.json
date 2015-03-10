@@ -19,7 +19,8 @@
     "prepublish": "coffee -o lib/ src/"
   },
   "dependencies": {
-    "scoped-http-client": "*"
+    "scoped-http-client": "*",
+    "deasync": "*"
   },
   "devDependencies": {
     "coffee-script": "1.8.0",

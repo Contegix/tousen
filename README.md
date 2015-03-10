@@ -17,6 +17,7 @@ npm install tousen
 ### Dependencies
 
 - scoped-http-client
+- deasync
 
 ## Usage
 
