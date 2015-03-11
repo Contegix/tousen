@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "scoped-http-client": "*",
-    "deasync": "*"
+    "async": "*"
   },
   "devDependencies": {
     "coffee-script": "1.8.0",
