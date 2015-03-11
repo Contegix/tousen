@@ -1,3 +1,9 @@
+# 0.0.5 2015-03-11
+
+## Features
+
+Replaced deasync with async as a dependency for synchronizing functions which require multiple API calls. This should help compatibility with applications such as Hubot which do not work well with deasync.
+
 # 0.0.4 2015-03-10
 
 Minor documentation updates

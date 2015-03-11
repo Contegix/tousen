@@ -1,7 +1,7 @@
 {
   "name": "tousen",
   "description": "Sensu API client wrapper",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Richard Chatterton <richard.chatterton@contegix.com>",
   "engines": [
     "node >= 0.8.0"
