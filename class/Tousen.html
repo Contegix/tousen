@@ -45,7 +45,7 @@ API endpoint methods are exposed via the instances of Sensu API clients bound to
 <li><a href='../class/Stashes.html'>Stashes</a> </li>
 </ul><p>Dependencies:</p><ul>
 <li>scoped-http-client</li>
-<li>deasync</li>
+<li>async</li>
 </ul>
 
 </div>
@@ -53,7 +53,7 @@ API endpoint methods are exposed via the instances of Sensu API clients bound to
   <h3>Author:</h3>
   <ul class='author'>
     <li>
-      Richard Chatterton <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#114;&#x69;&#99;&#x68;&#x61;&#x72;&#x64;&#x2e;&#99;&#104;&#x61;&#116;&#116;&#101;&#114;&#x74;&#111;&#x6e;&#x40;&#x63;&#111;&#110;&#x74;&#101;&#103;&#x69;&#120;&#46;&#99;&#111;&#109;">&#114;&#x69;&#99;&#x68;&#x61;&#x72;&#x64;&#x2e;&#99;&#104;&#x61;&#116;&#116;&#101;&#114;&#x74;&#111;&#x6e;&#x40;&#x63;&#111;&#110;&#x74;&#101;&#103;&#x69;&#120;&#46;&#99;&#111;&#109;</a> 
+      Richard Chatterton <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#114;&#x69;&#x63;&#104;&#x61;&#114;&#x64;&#46;&#99;&#x68;&#x61;&#x74;&#116;&#x65;&#114;&#116;&#x6f;&#x6e;&#x40;&#99;&#111;&#x6e;&#x74;&#101;&#103;&#105;&#120;&#x2e;&#x63;&#111;&#109;">&#114;&#x69;&#x63;&#104;&#x61;&#114;&#x64;&#46;&#99;&#x68;&#x61;&#x74;&#116;&#x65;&#114;&#116;&#x6f;&#x6e;&#x40;&#99;&#111;&#x6e;&#x74;&#101;&#103;&#105;&#120;&#x2e;&#x63;&#111;&#109;</a> 
     </li>
   </ul>
   <h3>Copyright:</h3>
@@ -177,7 +177,7 @@ API endpoint methods are exposed via the instances of Sensu API clients bound to
     </h4>
     <pre><code class='coffeescript'>Tousen = require &#39;tousen&#39;
 sensu_api = new Tousen url: &#39;http:&#47;&#47;sensu.example.com:4567&#39;
-sensu_api.get_events_silence_status callback (err, res) -&gt;
+sensu_api.get_events_silence_status callback: (err, res) -&gt;
   events = res</code></pre>
   </div>
 </div>
@@ -200,7 +200,7 @@ sensu_api.get_events_silence_status callback (err, res) -&gt;
 </div>
     </div>
     <div id='footer'>
-  March 10, 15 17:01:31 by
+  March 11, 15 13:52:55 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>

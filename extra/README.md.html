@@ -34,27 +34,27 @@
         </p>
       </nav>
       <div id='filecontents'>
-        <h1 id="tousen">tousen</h1><p>tousen (豆扇) is an async Sensu API client written in CoffeeScript, originally developed for use with <a href="https://hubot.github.com/">Hubot</a></p><p>See <em>Generating Documentation</em> for information on how to generate the documentation which describes the various API methods tousen provides.</p><p>Full documentation of all API wrapper methods can be found on the appropriate classes <a href="http://contegix.github.io/tousen/doc/index.html">here</a>.</p><p>Presently, it is in the very early stages of development.</p><h2 id="installation">Installation</h2>
+        <h1 id="tousen">tousen</h1><p>tousen (豆扇) is an async Sensu API client written in CoffeeScript, originally developed for use with <a href="https://hubot.github.com/">Hubot</a></p><p>Full documentation of all API wrapper methods can be found on the appropriate classes <a href="http://contegix.github.io/tousen/">here</a>.</p><p>Presently, it is in the very early stages of development.</p><h2 id="installation">Installation</h2>
 <pre><code>npm install tousen
 </code></pre><h3 id="dependencies">Dependencies</h3>
 <ul>
 <li>scoped-http-client</li>
-<li>deasync</li>
+<li>async</li>
 </ul>
 <h2 id="usage">Usage</h2><p>Require the package and instantiate a client.</p><pre><code>Tousen = require &#39;tousen&#39;
-sensu_api = new Tousen &#39;http://sensu.example.com&#39;
+sensu_api = new Tousen url: &#39;http://sensu.example.com:4567&#39;
 </code></pre><p>Then, make some API calls!</p><pre><code>sensu_api.events.get_events callback: (err, res) -&gt;
   if err
     console.log &#39;It looks like the Sensu API may not be working :(&#39;
   else
     console.log &#39;res is now an object containing all events!&#39;
-</code></pre><p>Full documentation may be found <a href="http://contegix.github.io/tousen/doc/index.html">here</a>.</p><h2 id="generating-documentation">Generating Documentation</h2><p>Documentation may be generated using <a href="https://github.com/coffeedoc/codo">codo</a>. To do so:</p><pre><code>npm install
+</code></pre><p>Full documentation may be found <a href="http://contegix.github.io/tousen/">here</a>.</p><h2 id="generating-documentation">Generating Documentation</h2><p>Documentation may be generated using <a href="https://github.com/coffeedoc/codo">codo</a>. To do so:</p><pre><code>npm install
 codo
 </code></pre><p>Then, open <code>doc/index.html</code> in a browser to view it.</p><h2 id="acknowledgements">Acknowledgements</h2><p>Credit goes to <a href="https://github.com/foonix">@foonix</a> for the name of this project.</p>
       </div>
     </div>
     <div id='footer'>
-  March 10, 15 17:01:31 by
+  March 11, 15 13:52:55 by
   <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
     Codo
   </a>
