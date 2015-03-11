@@ -23,7 +23,7 @@ Require the package and instantiate a client.
 
 ```
 Tousen = require 'tousen'
-sensu_api = new Tousen 'http://sensu.example.com'
+sensu_api = new Tousen url: 'http://sensu.example.com:4567'
 ```
 
 Then, make some API calls!

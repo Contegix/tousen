@@ -63,12 +63,11 @@ module.exports = class Tousen
   # @example Get an array of all event objects with additional parameters indicating silence status
   #   Tousen = require 'tousen'
   #   sensu_api = new Tousen url: 'http://sensu.example.com:4567'
-  #   sensu_api.get_events_silence_status callback (err, res) ->
+  #   sensu_api.get_events_silence_status callback: (err, res) ->
   #     events = res
   #
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
   get_events_silence_status: ({callback}) ->
-    stashes_err = stashes = events_err = events = stashes_done = events_done = null
     async.parallel {
       stashes: (async_cb) =>
         @stashes.get_stashes callback: async_cb
