@@ -13,7 +13,7 @@
 # Dependencies:
 #
 #  - scoped-http-client
-#  - deasync
+#  - async
 #
 # @author Richard Chatterton <richard.chatterton@contegix.com>
 # @copyright Contegix, LLC 2015
@@ -25,7 +25,7 @@ module.exports = class Tousen
   Aggregates = require './sensu_api/aggregates'
   Info = require './sensu_api/info'
   http_client = require 'scoped-http-client'
-  deasync = require 'deasync'
+  async = require 'async'
 
   # Construct a new instance of a Sensu API client
   #
@@ -69,32 +69,26 @@ module.exports = class Tousen
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
   get_events_silence_status: ({callback}) ->
     stashes_err = stashes = events_err = events = stashes_done = events_done = null
-    @stashes.get_stashes callback: (err, res) =>
-      stashes_err = err
-      stashes = res
-      stashes_done = true
-    @events.get_events callback: (err, res) =>
-      events_err = err
-      events = res
-      events_done = true
-    # Wait until both of the callbacks are called
-    deasync.sleep(100) until events_done? and stashes_done?
-    if stashes_err?
-      callback stashes_err
-    else if events_err?
-      callback events_err
-    else
-      stash_paths = stashes.map (stash) ->
-        return stash.path
-      for e,i in events
-        if "silence/#{e.client.name}/#{e.check.name}" in stash_paths
-          events[i].check['silenced'] = true
+    async.parallel {
+      stashes: (async_cb) =>
+        @stashes.get_stashes callback: async_cb
+      , events: (async_cb) =>
+        @events.get_events callback: async_cb
+      }, (err, res) =>
+        if err?
+          callback stashes_err
         else
-          events[i].check['silenced'] = false
-        if "silence/#{e.client.name}" in stash_paths
-          events[i].client['silenced'] = true
-        else
-          events[i].client['silenced'] = false
-        if events[i].client['silenced'] or events[i].check['silenced']
-          events[i]['silenced'] = true
-    callback null, events
+          stash_paths = res.stashes.map (stash) ->
+            return stash.path
+          for e,i in res.events
+            if "silence/#{e.client.name}/#{e.check.name}" in stash_paths
+              res.events[i].check['silenced'] = true
+            else
+              res.events[i].check['silenced'] = false
+            if "silence/#{e.client.name}" in stash_paths
+              res.events[i].client['silenced'] = true
+            else
+              res.events[i].client['silenced'] = false
+            if res.events[i].client['silenced'] or res.events[i].check['silenced']
+              res.events[i]['silenced'] = true
+        callback null, res.events
