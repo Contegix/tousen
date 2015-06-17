@@ -1,3 +1,9 @@
+# 0.0.6 2015-06-17
+
+## Bugfix
+
+Fixed an errant parameter passed to SensuAPI#delete() in Stashes#delete_stash() which resulted in an error.
+
 # 0.0.5 2015-03-11
 
 ## Features
