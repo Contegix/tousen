@@ -1,3 +1,9 @@
+# 0.0.8 2015-06-17
+
+## Bugfix
+
+Properly handle responses from the Sensu API with empty bodies
+
 # 0.0.7 2015-06-17
 
 ## Bugfix
