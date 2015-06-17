@@ -93,6 +93,6 @@ class Stashes extends SensuAPI
   # @param {String} path The path of the stash to be deleted
   # @param {Function} callback The callback to receive the response, of the form function(error, response)
   delete_stash: ({path, callback}) ->
-    @delete "stashes/#{path}", callback
+    @delete path: "stashes/#{path}", callback: callback
 
 module.exports = Stashes

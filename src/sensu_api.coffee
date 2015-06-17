@@ -88,7 +88,7 @@ class SensuAPI
         callback(new Error @status_codes[resp.statusCode], body)
       # If it's a status code that maps to "true", it's successful. Pass the body to the callback.
       else
-        if @output_json
+        if @output_json or body == ""
           callback(err, body)
         else
           try
